@@ -10,10 +10,13 @@ public class Game {
         gamePanel = new GamePanel(this);
 
         gameWindow.add(gamePanel);
+        gameWindow.pack();
 
     }
 
-    public void draw(Graphics g) {}
+    public void draw(Graphics g) {
+
+    }
 
 
 
