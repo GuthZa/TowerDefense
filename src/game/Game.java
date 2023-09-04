@@ -31,6 +31,8 @@ public class Game implements Runnable{
         gameWindow = new GameWindow(gamePanel);
 
         initInputs();
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus();
         startGameLoop();
     }
 
@@ -44,9 +46,6 @@ public class Game implements Runnable{
     private void initInputs() {
         gamePanel.addMouseListener(mouseInputs);
         gamePanel.addKeyListener(keyboardInputs);
-
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocus();
     }
 
     private void startGameLoop() {
@@ -80,15 +79,10 @@ public class Game implements Runnable{
     //Inputs
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> {
-                System.out.println("w pressed");
-                GameState.state = GameState.PLAYING;
-            }
-            case KeyEvent.VK_A -> {
-                System.out.println("a pressed");
-                GameState.state = GameState.MENU;
-            }
+            case KeyEvent.VK_W -> GameState.state = GameState.PLAYING;
+            case KeyEvent.VK_A -> GameState.state = GameState.MENU;
         }
+        System.out.println("key pressed");
     }
 
     public void keyReleased(KeyEvent e) {
@@ -98,6 +92,7 @@ public class Game implements Runnable{
     }
 
     public void mousePressed(MouseEvent e) {
+        playing.mousePressed(e);
     }
 
     public void mouseReleased(MouseEvent e) {

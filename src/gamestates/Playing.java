@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static utilz.Constants.GameConstants.*;
 
@@ -41,8 +42,21 @@ public class Playing extends State implements StateMethods{
     }
 
     @Override
-    public void draw(Graphics g) {g
-        g.setColor(Color.green);
+    public void draw(Graphics g) {
+        drawBackground(g);
+
+        for (int y = 0; y < GAME_WIDTH / TILE_SIZE; y++) {
+            for (int x = 0; x < GAME_HEIGHT / TILE_SIZE; x++) {
+                int value = levelData[x][y];
+                if (value == 1)
+                    g.drawImage(sprites.get(value),
+                        x * TILE_SIZE, y * TILE_SIZE,
+                        TILE_SIZE, TILE_SIZE, null);
+            }
+        }
+    }
+
+    private void drawBackground(Graphics g) {
         for (int i = 0; i < levelData.length; i++) {
             for (int j = 0; j < levelData[0].length; j++) {
                 g.setColor(Color.darkGray);
@@ -63,7 +77,8 @@ public class Playing extends State implements StateMethods{
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        levelData[e.getX() / TILE_SIZE][e.getY() / TILE_SIZE] = 1;
+        System.out.println("moused pressed");
     }
 
     @Override
