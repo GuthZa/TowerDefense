@@ -12,15 +12,12 @@ import java.util.ArrayList;
 import static utilz.Constants.GameConstants.*;
 
 public class Playing extends State implements StateMethods{
-    private Game game;
-
     private BufferedImage spriteAtlas;
     private ArrayList<BufferedImage> sprites = new ArrayList<>();
     private int[][] levelData;
 
     public Playing(Game game) {
         super(game);
-        this.game = game;
         importImages();
         loadSprites();
         levelData = new int[20][20];
@@ -38,26 +35,27 @@ public class Playing extends State implements StateMethods{
         }
     }
 
+    @Override
     public void update() {
 
     }
 
+    @Override
     public void draw(Graphics g) {
+//        g.setColor(Color.green);
+//        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         g.setColor(Color.green);
         for (int i = 0; i < levelData.length; i++) {
             for (int j = 0; j < levelData[0].length; j++) {
-
                 g.setColor(Color.darkGray);
                 g.drawImage(sprites.get(9), i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
                 g.drawRect(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
-//        g.drawImage(spriteAtlas, 0, 0, 352, 96, null);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
 
     @Override

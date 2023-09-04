@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 public class Game implements Runnable{
     private final GameWindow gameWindow;
     private final GamePanel gamePanel;
+    private Thread gameThread;
+
     private MouseInputs mouseInputs;
     private KeyboardInputs keyboardInputs;
 
@@ -29,10 +31,12 @@ public class Game implements Runnable{
         gameWindow = new GameWindow(gamePanel);
 
         initInputs();
+        startGameLoop();
     }
 
     private void initClasses() {
         playing = new Playing(this);
+        menu = new Menu(this);
         mouseInputs = new MouseInputs(this);
         keyboardInputs = new KeyboardInputs(this);
     }
@@ -45,13 +49,22 @@ public class Game implements Runnable{
         gamePanel.requestFocus();
     }
 
+    private void startGameLoop() {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
     public void draw(Graphics g) {
-        playing.draw(g);
+        switch (GameState.state) {
+            case PLAYING -> playing.draw(g);
+            case MENU -> menu.draw(g);
+        }
     }
 
     public void update() {
         switch (GameState.state) {
-
+            case PLAYING -> playing.update();
+            case MENU -> menu.update();
         }
         playing.update();
     }
@@ -66,6 +79,16 @@ public class Game implements Runnable{
 
     //Inputs
     public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W -> {
+                System.out.println("w pressed");
+                GameState.state = GameState.PLAYING;
+            }
+            case KeyEvent.VK_A -> {
+                System.out.println("a pressed");
+                GameState.state = GameState.MENU;
+            }
+        }
     }
 
     public void keyReleased(KeyEvent e) {
