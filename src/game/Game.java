@@ -1,18 +1,22 @@
 package game;
 
+import gamestates.GameState;
+import gamestates.Menu;
 import gamestates.Playing;
+import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 public class Game implements Runnable{
     private final GameWindow gameWindow;
     private final GamePanel gamePanel;
-    private MouseListener mouseListener;
+    private MouseInputs mouseInputs;
+    private KeyboardInputs keyboardInputs;
 
 
     private Playing playing;
+    private Menu menu;
 
 
 
@@ -22,15 +26,21 @@ public class Game implements Runnable{
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
 
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocus();
-
-        gamePanel.addMouseListener(mouseListener);
+        initInputs();
     }
 
     private void initClasses() {
         playing = new Playing(this);
-        mouseListener = new MouseInputs(this);
+        mouseInputs = new MouseInputs(this);
+        keyboardInputs = new KeyboardInputs(this);
+    }
+
+    private void initInputs() {
+        gamePanel.addMouseListener(mouseInputs);
+        gamePanel.addKeyListener(keyboardInputs);
+
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus();
     }
 
     public void draw(Graphics g) {
@@ -38,6 +48,9 @@ public class Game implements Runnable{
     }
 
     public void update() {
+        switch (GameState.state) {
+
+        }
         playing.update();
     }
 
@@ -51,5 +64,9 @@ public class Game implements Runnable{
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 }

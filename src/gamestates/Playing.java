@@ -4,13 +4,14 @@ import game.Game;
 import utilz.LoadSave;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import static utilz.Constants.GameConstants.*;
 
-public class Playing {
+public class Playing extends State implements StateMethods{
     private Game game;
 
     private BufferedImage spriteAtlas;
@@ -18,6 +19,7 @@ public class Playing {
     private int[][] levelData;
 
     public Playing(Game game) {
+        super(game);
         this.game = game;
         importImages();
         loadSprites();
@@ -51,5 +53,35 @@ public class Playing {
             }
         }
 //        g.drawImage(spriteAtlas, 0, 0, 352, 96, null);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
     }
 }
