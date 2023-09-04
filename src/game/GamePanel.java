@@ -16,19 +16,16 @@ public class GamePanel extends JPanel {
     }
 
     public void update() {
-
+        game.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setBackground(Color.gray);
 
-        g.setColor(Color.red);
+        game.draw(g);
+    }
 
-        for (int i = 0; i < GAME_WIDTH / TILE_SIZE; i++) {
-            for (int j = 0; j < GAME_HEIGHT / TILE_SIZE; j++) {
-                g.drawRect(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-            }
-        }
+    public Game getGame() {
+        return game;
     }
 }
