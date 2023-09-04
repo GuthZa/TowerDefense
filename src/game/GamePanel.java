@@ -13,6 +13,7 @@ public class GamePanel extends JPanel {
         this.game = game;
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 
+        setBackground(Color.gray);
     }
 
     public void update() {

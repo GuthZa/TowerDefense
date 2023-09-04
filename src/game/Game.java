@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import static utilz.Constants.*;
+
 public class Game implements Runnable{
     private final GameWindow gameWindow;
     private final GamePanel gamePanel;
@@ -70,10 +72,46 @@ public class Game implements Runnable{
 
     @Override
     public void run() {
+        double timePerFrame = 1000000000.0 / FPS;
+        double timePerUpdate = 1000000000.0 / UPS;
+
+        long previousTime = System.nanoTime();
+
+        int frames = 0;
+        int updates = 0;
+        long lastCheck = System.currentTimeMillis();
+
+        double deltaU = 0;
+        double deltaF = 0;
+
         while (true) {
-            update();
-            gamePanel.repaint();
+            long currentTime = System.nanoTime();
+
+            deltaU += (currentTime - previousTime) / timePerUpdate;
+            deltaF += (currentTime - previousTime) / timePerFrame;
+            previousTime = currentTime;
+
+            if (deltaU >= 1) {
+                update();
+                updates++;
+                deltaU--;
+            }
+
+            if (deltaF >= 1) {
+                gamePanel.repaint();
+                frames++;
+                deltaF--;
+            }
+
+            if (System.currentTimeMillis() - lastCheck >= 1000) {
+                lastCheck = System.currentTimeMillis();
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                frames = 0;
+                updates = 0;
+
+            }
         }
+
     }
 
     //Inputs

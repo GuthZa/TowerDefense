@@ -44,7 +44,7 @@ public class Playing extends State implements StateMethods{
     @Override
     public void draw(Graphics g) {
         drawBackground(g);
-
+        drawTowers(g);
         for (int y = 0; y < GAME_WIDTH / TILE_SIZE; y++) {
             for (int x = 0; x < GAME_HEIGHT / TILE_SIZE; x++) {
                 int value = levelData[x][y];
@@ -63,6 +63,12 @@ public class Playing extends State implements StateMethods{
                 g.drawImage(sprites.get(9), i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
                 g.drawRect(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
+        }
+    }
+
+    private void drawTowers(Graphics g) {
+        for (int i = 0; i < 4; i++) {
+            g.drawImage(sprites.get(i), GAME_HEIGHT - (TILE_SIZE * 3), (i + 1) * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE, null);
         }
     }
 
