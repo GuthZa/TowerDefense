@@ -41,9 +41,7 @@ public class Playing extends State implements StateMethods{
     }
 
     @Override
-    public void draw(Graphics g) {
-//        g.setColor(Color.green);
-//        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    public void draw(Graphics g) {g
         g.setColor(Color.green);
         for (int i = 0; i < levelData.length; i++) {
             for (int j = 0; j < levelData[0].length; j++) {
