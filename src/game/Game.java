@@ -7,6 +7,8 @@ import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public class Game implements Runnable{
     private final GameWindow gameWindow;
@@ -62,6 +64,35 @@ public class Game implements Runnable{
         }
     }
 
+    //Inputs
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        System.out.println("mouse dragged: " + e.getButton());
+    }
+    public void mouseEntered(MouseEvent e) {
+
+    }
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+
+    //Getters & Setters
     public Playing getPlaying() {
         return playing;
     }
