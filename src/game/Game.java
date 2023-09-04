@@ -5,6 +5,7 @@ import gamestates.Menu;
 import gamestates.Playing;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import tiles.TileManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,8 @@ import static utilz.Constants.*;
 public class Game implements Runnable{
     private final GameWindow gameWindow;
     private final GamePanel gamePanel;
+    private TileManager tileManager;
+
     private Thread gameThread;
 
     private MouseInputs mouseInputs;
@@ -43,6 +46,7 @@ public class Game implements Runnable{
         menu = new Menu(this);
         mouseInputs = new MouseInputs(this);
         keyboardInputs = new KeyboardInputs(this);
+        tileManager = new TileManager();
     }
 
     private void initInputs() {
